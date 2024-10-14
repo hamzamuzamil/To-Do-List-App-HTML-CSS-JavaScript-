@@ -1,0 +1,119 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to right, #49c6ff, #90d5ff);
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            margin-bottom: 15px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #673ab7;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .task-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .task-list li {
+            background-color: #f2f2f2;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .task-list li span {
+            margin-right: 10px;
+        }
+
+         .task-list li button {
+            background-color: #673ab7;
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Todo List</h1>
+        <div class="input-group">
+            <input type="text" id="task-input" placeholder="Enter a task">
+            <button id="add-task-btn">Add Task</button>
+        </div>
+        <ul class="task-list" id="task-list"></ul>
+    </div>
+
+    <script>
+        const taskInput = document.getElementById('task-input');
+        const addTaskBtn = document.getElementById('add-task-btn');
+        const taskList = document.getElementById('task-list');
+
+        addTaskBtn.addEventListener('click', () => {
+            const task = taskInput.value.trim();
+            if (task) {
+                const taskElement = document.createElement('li');
+                taskElement.innerHTML = `
+                    <span>${task}</span>
+                    <button class="delete-task-btn">Delete</button>
+                `;
+                taskList.appendChild(taskElement);
+                taskInput.value = '';
+            }
+        });
+
+        taskList.addEventListener('click', (e) => {
+            if (e.target.classList.contains('delete-task-btn')) {
+                const taskElement = e.target.parentNode;
+                taskList.removeChild(taskElement);
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
